@@ -28,7 +28,7 @@
        <item>
         <widget class="QPushButton" name="pbDisconnect">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Disconnect</string>
@@ -56,6 +56,9 @@
             <enum>QFrame::Shadow::Raised</enum>
            </property>
            <widget class="QRadioButton" name="rbHttp">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -113,7 +116,7 @@ Host: naver.com
        <item>
         <widget class="QPushButton" name="pbSend">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>Send</string>

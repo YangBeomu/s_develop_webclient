@@ -7,7 +7,7 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    LoadPrevInfo();
+    Load();
 
     QObject::connect(&socket_, &QAbstractSocket::connected,
                      this, &Widget::doConnected);
@@ -19,11 +19,13 @@ Widget::Widget(QWidget *parent)
                      this, &Widget::doReadyRead);
 
     QObject::connect(&socket_, &QAbstractSocket::stateChanged, this, &Widget::doStateChanged);
+
+    doStateChanged();
 }
 
 Widget::~Widget()
 {
-    Saved();
+    Save();
     delete ui;
 }
 
@@ -90,7 +92,7 @@ void Widget::doStateChanged() {
     }
 }
 
-void Widget::Saved(const QString fileName) {
+void Widget::Save(const QString fileName) {
     QRect rect = this->geometry();
 
     QSettings file(fileName, QSettings::IniFormat);
@@ -105,7 +107,7 @@ void Widget::Saved(const QString fileName) {
     qDebug()<<ui->pteSend->toPlainText();
 }
 
-void Widget::LoadPrevInfo(const QString fileName) {
+void Widget::Load(const QString fileName) {
     if(!QFile(fileName).exists()) return;
 
     QSettings file(fileName, QSettings::IniFormat);

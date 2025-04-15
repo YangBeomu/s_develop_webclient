@@ -16,6 +16,18 @@ QT_END_NAMESPACE
 class Widget : public QWidget
 {
     Q_OBJECT
+private:
+    bool httpsEnabled = false;
+    QSslSocket socket_;
+
+    void Save(const QString fileName = "saved.ini");
+    void Load(const QString fileName = "saved.ini");
+
+private slots:
+    void doConnected();
+    void doDisconnected();
+    void doReadyRead();
+    void doStateChanged();
 
 public:
     Widget(QWidget *parent = nullptr);
@@ -27,17 +39,8 @@ private slots:
     void on_pbSend_clicked();
     void on_pbClear_clicked();
 
-    void doConnected();
-    void doDisconnected();
-    void doReadyRead();
-    void doStateChanged();
-
 private:
-    bool httpsEnabled = false;
     Ui::Widget *ui;
-    QSslSocket socket_;
 
-    void Saved(const QString fileName = "saved.ini");
-    void LoadPrevInfo(const QString fileName = "saved.ini");
 };
 #endif // WIDGET_H
